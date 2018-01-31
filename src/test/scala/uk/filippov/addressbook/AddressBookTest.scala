@@ -41,7 +41,8 @@ class AddressBookTest extends FlatSpec with Matchers {
   }
 
   "The oldest person" should "be Wes" in {
-    assert(AddressBook.oldest(SampleAddressBook) == Person("Wes Jackson", "Male", date(1974, 8, 14)))
+    assert(AddressBook.oldest(SampleAddressBook) ==
+      Person("Wes Jackson", "Male", date(1974, 8, 14)))
   }
 
   "The age difference between Paul and Bill" should "be 2862" in {
@@ -53,16 +54,20 @@ class AddressBookTest extends FlatSpec with Matchers {
 
   "The date parser" should "work" in {
     implicit val customDateDecoder: CellDecoder[LocalDate] = AddressBook.customDateDecoder
+
     val input = "1,10/12/78\n2,09/01/15"
     val res = input.unsafeReadCsv[List, (Int, LocalDate)](rfc)
+
     assert(res == List((1, date(1978, 12, 10)), (2, date(2015, 1, 9))))
   }
 
   "The person parser" should "work" in {
     implicit val customDateDecoder: CellDecoder[LocalDate] = AddressBook.customDateDecoder
     implicit val personDecoder: RowDecoder[Person] = AddressBook.personDecoder
+
     val input = "Bill McKnight, Male, 16/03/77\nPaul Robinson, Male, 15/01/85"
     val res = input.unsafeReadCsv[List, Person](rfc)
+
     assert(res == List(
       Person("Bill McKnight", "Male", date(1977, 3, 16)),
       Person("Paul Robinson", "Male", date(1985, 1, 15))))
