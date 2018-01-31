@@ -16,9 +16,23 @@ class AddressBookTest extends FlatSpec with Matchers {
     Person("Wes Jackson", "Male", "14/08/74")
   )
 
+  val SampleNontrivialAddressBook = List(
+    Person("Bill McKnight", "Male", "16/03/77"),
+    Person("Robinson, Paul", "Male", "15/01/85"),
+    Person("Gemma Lane", "Female", "20/11/1991"),
+    Person("Sarah Stone", "Female", "20/09/2014"),
+    Person("Wes \"Jack\" Jackson", "Male", "14/08/74")
+  )
+
   "The address book" should "be loaded from file" in {
-    assert(AddressBook.loadBook(fromInputStream(getClass.getResourceAsStream("/AddressBook")).mkString) ==
+    assert(AddressBook.loadBook(fromInputStream(getClass.getResourceAsStream("/AddressBook"))) ==
       SampleAddressBook)
+  }
+
+  "The address book" should "be loaded from a quoted file with escapes" in {
+    val book = AddressBook.loadBook(fromInputStream(getClass.getResourceAsStream("/NontrivialAddressBook")))
+    assert(book == SampleNontrivialAddressBook)
+    assert(AddressBook.dateOfBirth(book(3)) == date(2014, 9, 20))
   }
 
   "The count of males" should "be correct" in {
