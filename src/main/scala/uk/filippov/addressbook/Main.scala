@@ -14,10 +14,12 @@ object Main extends App {
     print("  2. ")
     println(AddressBook.oldest(people).name)
 
-    val Some(bill) = people.find(_.name.startsWith("Bill "))
-    val Some(paul) = people.find(_.name.startsWith("Paul "))
+    val ageDiff = for {
+      bill <- people.find(_.name.startsWith("Bill "))
+      paul <- people.find(_.name.startsWith("Paul "))
+    } yield AddressBook.ageDifferenceInDays(bill, paul)
 
     print("  3. ")
-    println(AddressBook.ageDifferenceInDays(bill, paul))
+    println(ageDiff.map(_.toString).getOrElse("Not found"))
   }
 }
