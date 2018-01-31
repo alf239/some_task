@@ -37,7 +37,14 @@ Good Luck!
 
 # Solution
 
-## The questions so far:
+## Running
+
+Just run (from this directory)
+```$bash
+$ sbt "run ./AddressBook"
+```
+
+## The questions and assumptions:
 
 A few questions:
 
@@ -71,17 +78,10 @@ A few questions:
    calculation that all the people are born in the same time zone. The difference in days is defined
    as a _calendar_ difference. So if one person was born a second before midnight, and
    the other — one _second_ later, that will still be one "day" difference.
-
-## Basic Solution
-
-```
-10 PRINT "1. 3"
-20 PRINT "2. Wes Jackson"
-25 REM "Using https://www.timeanddate.com/date/durationresult.html?d1=15&m1=01&y1=1985&d2=16&m2=03&y2=1977"
-30 PRINT "3. 2862" 
-```
-
-Immediately the question arises of the _format_ of the name output:
-should it be `Wes Jackson` or `Wes Jackson, Male, 14/08/74`?
- > *Assumption:* We assume that printing a name is good enough.  
-
+11. How do we run it?
+  > *Assumption:* We do not _actually_ put it in production, so we do _not_ create the 
+  scripts to run it from sommand line without `sbt`: that would require a Scala 
+  runtime, and most of the time you just don't have it installed. 
+  So we assume running from either `sbt` or an IDE.  
+12. The _format_ of the name output: should it be `Wes Jackson` or `Wes Jackson, Male, 14/08/74`?
+  > *Assumption:* We assume that printing a name is good enough.  

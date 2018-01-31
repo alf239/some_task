@@ -1,18 +1,23 @@
 package uk.filippov.addressbook
 
-// We read the address book from the file specified as the parameter for our app
 object Main extends App {
-  val people = AddressBook.loadBook(io.Source.fromFile(args.head, "UTF-8"))
+  if (args.length != 1) {
+    println("Usage: sbt \"run ./AddressBook\"")
+  } else {
+    val inputFile = args.head
 
-  print("  1. ")
-  println(AddressBook.countMales(people))
+    val people = AddressBook.loadBook(io.Source.fromFile(inputFile, "UTF-8"))
 
-  print("  2. ")
-  println(AddressBook.oldest(people).name)
+    print("  1. ")
+    println(AddressBook.countMales(people))
 
-  val Some(bill) = people.find(_.name.startsWith("Bill "))
-  val Some(paul) = people.find(_.name.startsWith("Paul "))
+    print("  2. ")
+    println(AddressBook.oldest(people).name)
 
-  print("  3. ")
-  println(AddressBook.ageDifferenceInDays(bill, paul))
+    val Some(bill) = people.find(_.name.startsWith("Bill "))
+    val Some(paul) = people.find(_.name.startsWith("Paul "))
+
+    print("  3. ")
+    println(AddressBook.ageDifferenceInDays(bill, paul))
+  }
 }

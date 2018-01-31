@@ -7,7 +7,8 @@ lazy val root = (project in file(".")).
       scalaVersion := "2.12.3",
       version := "0.1.0-SNAPSHOT"
     )),
-    name := "Hello",
+    mainClass in Compile := Some("uk.filippov.addressbook.Main"),
+    name := "AddressBook",
     libraryDependencies ++= Seq(
       scalaTest % Test,
       "com.nrinaudo" %% "kantan.csv" % "0.3.1",
