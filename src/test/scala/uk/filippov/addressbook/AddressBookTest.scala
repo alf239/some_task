@@ -1,5 +1,7 @@
 package uk.filippov.addressbook
 
+import java.time.LocalDate
+
 import org.scalatest.{FlatSpec, Matchers}
 import uk.filippov.addressbook.AddressBook.Person
 
@@ -22,4 +24,18 @@ class AddressBookTest extends FlatSpec with Matchers {
   "The count of males" should "be correct" in {
     assert(AddressBook.countMales(SampleAddressBook) == 3)
   }
+
+  "The oldest person" should "be Wes" in {
+    assert(AddressBook.oldest(SampleAddressBook) == Person("Wes Jackson", "Male", "14/08/74"))
+  }
+
+  "The dates" should "be reasonable" in {
+    val dates = SampleAddressBook.map(_.dateOfBirth)
+    assert(dates == List(
+      date(1977, 3, 16), date(1985, 1, 15), date(1991, 11, 20), date(1980, 9, 20), date(1974, 8, 14)
+    ))
+  }
+
+  def date(year: Int, month: Int, dayOfMonth: Int): LocalDate =
+    LocalDate.of(year, month, dayOfMonth)
 }
