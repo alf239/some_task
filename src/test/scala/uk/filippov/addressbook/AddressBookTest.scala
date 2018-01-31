@@ -29,8 +29,15 @@ class AddressBookTest extends FlatSpec with Matchers {
     assert(AddressBook.oldest(SampleAddressBook) == Person("Wes Jackson", "Male", "14/08/74"))
   }
 
+  "The age difference between Paul and Bill" should "be 2862" in {
+    val Some(bill) = SampleAddressBook.find(_.name.startsWith("Bill "))
+    val Some(paul) = SampleAddressBook.find(_.name.startsWith("Paul "))
+
+    assert(AddressBook.ageDifference(bill, paul) == 2862)
+  }
+
   "The dates" should "be reasonable" in {
-    val dates = SampleAddressBook.map(_.dateOfBirth)
+    val dates = SampleAddressBook.map(AddressBook.dateOfBirth)
     assert(dates == List(
       date(1977, 3, 16), date(1985, 1, 15), date(1991, 11, 20), date(1980, 9, 20), date(1974, 8, 14)
     ))
