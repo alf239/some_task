@@ -12,6 +12,7 @@ lazy val root = (project in file(".")).
       scalaTest % Test,
       "com.nrinaudo" %% "kantan.csv" % "0.3.1",
       "com.nrinaudo" %% "kantan.csv-java8" % "0.3.1",
-      "com.nrinaudo" %% "kantan.csv-generic" % "0.3.1"
+      "com.nrinaudo" %% "kantan.csv-generic" % "0.3.1",
+      "com.nrinaudo" %% "kantan.csv-java8" % "0.3.1"
     )
   )
