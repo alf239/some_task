@@ -14,5 +14,5 @@ object Main extends App {
   val Some(paul) = people.find(_.name.startsWith("Paul "))
 
   print("  3. ")
-  println(AddressBook.ageDifference(bill, paul))
+  println(AddressBook.ageDifferenceInDays(bill, paul))
 }

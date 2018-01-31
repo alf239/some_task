@@ -42,15 +42,35 @@ Good Luck!
 A few questions:
 
 1. Should the language be Scala? It looks like a bit of an overkill for such a small task.
-2. What do we know about the address book? Is it supposed to be correct? What encoding do we use? 
+   > *Interviewer:* use whatever language you feel shows your skills off best—you are applying
+   for a Scala position though so there should be a good reason stated if you decide not to use that.
+    
+2. What do we know about the address book? Is it supposed to be correct? What encoding do we use?
+   > *Assumption:* we assume that for the sake of the _results_ the data is correct.
+   We may have an occasional broken line, but we will swallow it, maybe printing an exception
+   — but nothing more than that at this stage.  
 3. Do we expect the address book to change?
+   > *Assumption:* we assume that the program is run once with a file name passed as a parameter.  
 4. Can we assume that the output stream is correctly configured for whatever characters are there in the address book?
+   > *Assumption:* Yes; we do not rewrite the I/O system unless there's a _very_ convincing problem.  
 5. How this particular format handles commas in the field values?
+   > *Assumption:* Strings with quotes are expected to be enclosed in double quotes.
+   Double quotes within double quotes could be used by duplicating the character, like that:
+   `"Alexey ""Alf"" Filippov"`.
+   There's _no_ special meaning associated with the backslash.   
 6. Are the people in the book still alive? Can we be sure there are no people older than 99 years?
-7. Can we assume that gender will always be specified and a “male” in the task refers to a person having “Male” (all Latin, capital M) in the second column?
+   > *Assumption:* The dates are extended by adding `19` whenever we only have 2 characters for a year
+   In order to support people born before or after XX century please use the full year.
+7. Can we assume that gender will always be specified and a “male” in the task refers to a person having “Male”
+   (all Latin, capital M) in the second column?
+   > *Assumption:* We can. We don't introduce an enum here, as it does not win us much if anything.
 8. Can we assume there’s only one Bill?  
 9. Can we assume there’s only one Paul?  
 10. What do we know about people’s birth places and the corresponding calendars?
+   > *Assumption:* Now that's corner cutting at its best. We assume for the sake of the date difference 
+   calculation that all the people are born in the same time zone. The difference in days is defined
+   as a _calendar_ difference. So if one person was born a second before midnight, and
+   the other — one _second_ later, that will still be one "day" difference.
 
 ## Basic Solution
 
@@ -63,4 +83,5 @@ A few questions:
 
 Immediately the question arises of the _format_ of the name output:
 should it be `Wes Jackson` or `Wes Jackson, Male, 14/08/74`?
+ > *Assumption:* We assume that printing a name is good enough.  
 

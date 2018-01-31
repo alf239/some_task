@@ -14,7 +14,7 @@ object AddressBook {
 
   case class Person(name: String, gender: String, birthday: String)
 
-  def ageDifference(a: Person, b: Person): Long =
+  def ageDifferenceInDays(a: Person, b: Person): Long =
     DAYS.between(dateOfBirth(a), dateOfBirth(b))
 
   def oldest(people: List[Person]): Person =

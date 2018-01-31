@@ -47,7 +47,7 @@ class AddressBookTest extends FlatSpec with Matchers {
     val Some(bill) = SampleAddressBook.find(_.name.startsWith("Bill "))
     val Some(paul) = SampleAddressBook.find(_.name.startsWith("Paul "))
 
-    assert(AddressBook.ageDifference(bill, paul) == 2862)
+    assert(AddressBook.ageDifferenceInDays(bill, paul) == 2862)
   }
 
   "The dates" should "be reasonable" in {
