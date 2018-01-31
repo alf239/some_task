@@ -8,7 +8,7 @@ object Main extends App {
   println(AddressBook.countMales(people))
 
   print("2. ")
-  println(AddressBook.oldest(people))
+  println(AddressBook.oldest(people).name)
 
   val Some(bill) = people.find(_.name.startsWith("Bill "))
   val Some(paul) = people.find(_.name.startsWith("Paul "))
